@@ -1,9 +1,9 @@
 param location string = 'koreacentral'
 param appServicePlanName string = 'bicepAppServicePlan'
-param webAppName string = 'bicepWebAppDemo'
+param webAppName string = 'bicepWebAppDemoAutomated'
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
- name: '${appServicePlanName}-shagun'
+ name: '${appServicePlanName}-AutomatedbyShagunGithub'
 
   location: location
   sku: {
@@ -13,7 +13,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
-  name: '${webAppName}-shagun'
+  name: '${webAppName}-AutomatedbyShagunGithub'
 
   location: location
   properties: {
