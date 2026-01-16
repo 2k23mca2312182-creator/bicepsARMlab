@@ -1,0 +1,30 @@
+name: Deploy Bicep to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/setup-azurecli@v1
+
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Install Bicep CLI
+      run: az bicep install
+
+    - name: Deploy Bicep Template
+      run: |
+        az bicep build --file webapp.bicep
+        az deployment group create --resource-group IaCLabRG-shagun --template-file webapp.json --mode Incremental
